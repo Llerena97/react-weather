@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
 
-const Form = () => {
+const Form = ({dataQuery}) => {
 
-  const [search, saveSearch] = useState({
+  const [search, setSearch] = useState({
     city: '',
     country: ''
   })
 
   const handleChange = e => {
-      saveSearch({
+      setSearch({
         ...search,
         [e.target.name]: e.target.value
       })
   }
 
+  const getWeather = e => {
+    e.preventDefault();
+    dataQuery(search);
+  }
+
   return (
-    <form>
+    <form
+      onSubmit={getWeather}
+    >
       <div className="input-field col s12">
         <input
           type="text"
