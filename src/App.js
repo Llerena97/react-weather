@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Form from './components/Form';
 import Error from './components/Error';
+import Weather from './components/Weather';
 
 function App() {
 
@@ -35,8 +36,10 @@ function App() {
   let component;
   if (error) {
     component = <Error message='Both fields are required' />
+  } else if (result.cod === '404') {
+    component = <Error message='City not found' />
   } else {
-    component = null;
+    component = <Weather result={result} />;
   }
 
   return (
